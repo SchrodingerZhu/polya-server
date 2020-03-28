@@ -3,6 +3,7 @@ import json
 import argparse
 from urllib.request import urlopen
 
+
 def getfirststr(arr):
     return arr if type(arr) == str else arr[0]
 

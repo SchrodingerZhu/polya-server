@@ -2,6 +2,7 @@ import tempfile
 import tarfile
 import os
 
+
 def get_tar_result(path):
     f = tempfile.NamedTemporaryFile()
     tar = tarfile.open(f.name, "w")

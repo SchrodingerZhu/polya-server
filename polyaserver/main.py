@@ -3,13 +3,15 @@ import falcon
 import time
 
 from polyaserver.db import DB, TEMPDB
-from polyaserver.resources import AuthRes, RevokeRes, ConfigRes, ImageRes, NextRes, StudentListRes, StudentRes, InfoRes, SaveRes, RawRes, AdminRes
+from polyaserver.resources import AuthRes, RevokeRes, ConfigRes, ImageRes, NextRes, StudentListRes, StudentRes, InfoRes, \
+    SaveRes, RawRes, AdminRes
 from polyaserver.classes import Student
 from polyaserver.hooks import Authorized
 from polyaserver.db import savedata, loaddata
 from polyaserver.utils import read_next_ungraded_student, get_tar_result, readdir, unlockStudent, lockStudent
 
 sigTermOn = False
+
 
 def SigtermHandler(signal_received, frame):
     global sigTermOn

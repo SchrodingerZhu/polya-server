@@ -24,7 +24,8 @@ def valid_login(req):
 
 def read_next_ungraded_student():
     for _, id in enumerate(DB.grading_students):
-        if DB.grading_students[id]["finished"] == False and DB.grading_students[id]["skipped"] == False and (id not in TEMPDB["lockdowns"].keys()):
+        if DB.grading_students[id]["finished"] == False and DB.grading_students[id]["skipped"] == False and (
+                id not in TEMPDB["lockdowns"].keys()):
             return Student(id)
     return None
 

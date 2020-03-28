@@ -2,7 +2,6 @@ import csv
 import json
 import argparse
 
-
 DBNAME = "db.json"
 
 

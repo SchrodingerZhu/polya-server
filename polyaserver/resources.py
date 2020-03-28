@@ -4,7 +4,8 @@ from polyaserver.internal_const import DEFAULT_GRADING_STATUS
 
 from polyaserver.classes import Student
 from polyaserver.hooks import Authorized, FromLocal
-from polyaserver.utils import get_tar_result, lockStudent, read_next_ungraded_student, unlockStudent, readJSON, get_auth_key
+from polyaserver.utils import get_tar_result, lockStudent, read_next_ungraded_student, unlockStudent, readJSON, \
+    get_auth_key
 from polyaserver.db import savedata
 
 from argon2 import PasswordHasher
@@ -49,6 +50,7 @@ class AuthRes(PublicRes):
             "token": uuidid
         }
 
+
 # ---- /revoke ----
 @falcon.before(Authorized)
 class RevokeRes(PublicRes):
@@ -83,6 +85,7 @@ class ConfigRes(PublicRes):
 
     on_post = on_get
 
+
 # --- / ----
 @falcon.before(Authorized)
 class InfoRes(PublicRes):
@@ -90,6 +93,7 @@ class InfoRes(PublicRes):
         resp.media = {"hello": "world"}
 
     on_get = on_post
+
 
 # --- /image.sfs ----
 @falcon.before(Authorized)
@@ -99,6 +103,7 @@ class ImageRes(PublicRes):
         resp.stream = open("./image.sfs")
 
     on_get = on_post
+
 
 # ---- /next ----
 @falcon.before(Authorized)
@@ -118,6 +123,7 @@ class NextRes(PublicRes):
         lockStudent(student.student_id, by)
 
     on_post = on_get
+
 
 # ---- /students ----
 @falcon.before(Authorized)
@@ -140,6 +146,7 @@ class StudentListRes(PublicRes):
                 "students": list(DB.grading_students.keys())
             }
 
+
 # ---- /student/{id} ----
 @falcon.before(Authorized)
 class StudentRes(PublicRes):
@@ -158,7 +165,7 @@ class StudentRes(PublicRes):
             by = get_auth_key(req)
             locked = not (student.student_id not in TEMPDB["lockdowns"])
             lockedByOthers = locked and (
-                TEMPDB["lockdowns"][student.student_id] != by)
+                    TEMPDB["lockdowns"][student.student_id] != by)
             if lockedByOthers:
                 resp.status = falcon.HTTP_FORBIDDEN
                 resp.media = {
@@ -273,6 +280,7 @@ class SaveRes(PublicRes):
         savedata()
         resp.media = {}
 
+
 # ---- /raw ----
 @falcon.before(Authorized)
 class RawRes(PublicRes):
@@ -281,6 +289,7 @@ class RawRes(PublicRes):
             resp.media = DB
         elif action == "tempdb":
             resp.media = TEMPDB
+
 
 # ---- /admin ----
 @falcon.before(FromLocal)

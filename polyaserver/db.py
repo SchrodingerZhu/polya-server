@@ -1,6 +1,7 @@
 import json
 import ZODB, ZODB.FileStorage, transaction
 
+
 def savedata():
     transaction.commit()
     print("Transcation committed")
@@ -21,6 +22,7 @@ def loaddata():
     print("Database connected")
     return root, conn
 
+
 def initialize_db(root):
     root.sessions = []
     root.students = {}
@@ -28,9 +30,11 @@ def initialize_db(root):
     root.initialized = True
     print("Database initialized")
 
+
 def initialize_temp_db(root):
     root.temp = {}
     root.temp["lockdowns"] = {}
+
 
 DB, CONN = loaddata()
 TEMPDB = DB.temp

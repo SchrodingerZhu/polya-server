@@ -142,7 +142,7 @@ cython_debug/
 media
 static
 
-
+.idea
 /dep
 /dep.pub
 /.vscode
